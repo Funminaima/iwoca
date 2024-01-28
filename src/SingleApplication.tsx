@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
+import { IApplication } from "./type";
 
-const SingleApplication = ({ application }) => {
+interface Props {
+  application: IApplication;
+  extractDateFromTimestamp: (timestamp: string) => string;
+}
+
+const SingleApplication = ({
+  application,
+  extractDateFromTimestamp,
+}: Props) => {
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
@@ -12,7 +21,7 @@ const SingleApplication = ({ application }) => {
         <sub>Name</sub>
         {application.first_name} {application.last_name}
       </div>
-      <div className={styles.cell}>
+      <div className={`${styles.cell} ${styles.email}`}>
         <sub>Email</sub>
         {application.email}
       </div>
@@ -22,11 +31,11 @@ const SingleApplication = ({ application }) => {
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>
-        {application.date_created}
+        {extractDateFromTimestamp(application.date_created)}
       </div>
       <div className={styles.cell}>
         <sub>Expiry date</sub>
-        {application.expiry_date}
+        {extractDateFromTimestamp(application.expiry_date)}
       </div>
     </div>
   );

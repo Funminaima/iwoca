@@ -15,8 +15,29 @@
 }
 
 .cell {
-  text-align: left;
-  padding: 0 15px;
+  /* text-align: left;
+  padding: 0 15px; */
+  display: flex;
+  width: 180px;
+  padding-bottom: 3px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  color: var(--Denim-15, #0c2340);
+  font-family: Aesop;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+.email {
+  width: 250px;
+  color: var(--Denim-45, #246ac1);
+  font-family: Aesop;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 16px */
 }
 
 .cell sub {

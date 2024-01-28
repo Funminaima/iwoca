@@ -26,11 +26,22 @@ const Applications = () => {
   const handleLoadMore = () => {
     setPage((page) => page + 1);
   };
+  const extractDateFromTimestamp = (timestamp: string): string => {
+    const dateObject = new Date(timestamp);
+
+    const date = dateObject.toISOString().split("T")[0];
+
+    return date;
+  };
 
   return (
     <div className={styles.Applications}>
       {data.map((application, index) => (
-        <SingleApplication key={index} application={application} />
+        <SingleApplication
+          key={index}
+          application={application}
+          extractDateFromTimestamp={extractDateFromTimestamp}
+        />
       ))}
 
       <Button className="btn" onClick={handleLoadMore}>

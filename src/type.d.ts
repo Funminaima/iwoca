@@ -1,6 +1,6 @@
 export type IApplication = {
   guid: string;
-  loan_amount: 37597;
+  loan_amount: string;
   first_name: string;
   last_name: string;
   company: string;

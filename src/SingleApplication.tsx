@@ -5,11 +5,13 @@ import { IApplication } from "./type";
 interface Props {
   application: IApplication;
   extractDateFromTimestamp: (timestamp: string) => string;
+  formatCurrency: (currencyString: string) => string;
 }
 
 const SingleApplication = ({
   application,
   extractDateFromTimestamp,
+  formatCurrency,
 }: Props) => {
   return (
     <div className={styles.SingleApplication}>
@@ -27,7 +29,7 @@ const SingleApplication = ({
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
-        {application.loan_amount}
+        {formatCurrency(application.loan_amount)}
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>

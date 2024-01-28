@@ -9,11 +9,13 @@ const Applications = () => {
   const [data, setData] = useState<IApplication[]>([]);
   const [page, setPage] = useState<number>(1);
   const [limit] = useState<number>(5);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
         const responseData = await getApplication(page, limit);
+        setLoading(false);
         setData(responseData);
       } catch (error) {
         console.error("Error fetching applications:", error);
@@ -33,20 +35,40 @@ const Applications = () => {
 
     return date;
   };
+  const formatCurrency = (currencyString: string | number): string => {
+    if (typeof currencyString === "number") {
+      currencyString = currencyString.toString();
+    }
+
+    const stringWithoutSymbol = currencyString.slice(1);
+
+    const numberWithCommas =
+      Number(stringWithoutSymbol).toLocaleString("en-GB");
+
+    const formattedString = `£${numberWithCommas}`;
+
+    return formattedString;
+  };
 
   return (
     <div className={styles.Applications}>
-      {data.map((application, index) => (
-        <SingleApplication
-          key={index}
-          application={application}
-          extractDateFromTimestamp={extractDateFromTimestamp}
-        />
-      ))}
-
-      <Button className="btn" onClick={handleLoadMore}>
-        load more
-      </Button>
+      {loading ? (
+        <p style={{ textAlign: "center" }}>Loading...</p>
+      ) : (
+        <>
+          {data.map((application, index) => (
+            <SingleApplication
+              key={index}
+              application={application}
+              extractDateFromTimestamp={extractDateFromTimestamp}
+              formatCurrency={formatCurrency}
+            />
+          ))}
+          <Button className="btn" onClick={handleLoadMore}>
+            load more
+          </Button>
+        </>
+      )}
     </div>
   );
 };
